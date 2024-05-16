@@ -25,6 +25,48 @@ namespace Auctions.Controllers
             var applicationDbContext = _listingsServices.GetAll();
             return View(await applicationDbContext.ToListAsync());
         }
+        // GET: Listings/Details/5
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var listing = await _context.Listings
+        //        .Include(l => l.User)
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (listing == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(listing);
+        //}
+
+        // GET :Listings/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Listings/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,price,ImagePath,IsSold,IdentityUserId")] Listing listing)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(listing);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", listing.IdentityUserId);
+            return View(listing);
+        }
+
 
 
     }
