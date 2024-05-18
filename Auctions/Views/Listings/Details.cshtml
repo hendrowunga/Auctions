@@ -50,12 +50,12 @@
                     </div>
                 </form>
                 <p> Bids submitted: @Model.Bids.Count</p>
-                <br />
+                <br>
                 @if (userManager.GetUserId(User) == Model.User.Id)
                 {
                     @foreach(var bid in Model.Bids)
                     {
-                        <ul style="list-style-type:none">
+                        <ul style="list-style-type: none;">
                             @bid.User.UserName bidded $@bid.Price.ToString("N2")
                         </ul>
                     }
@@ -77,7 +77,7 @@
                 {
                     @if (Model.IsSold == false)
                     {
-                        <a asp-action="CloseBidding" asp-route-id="@Model.Id">Close bidding</a>
+                        <a asp-action= "CloseBidding" asp-route-id="@Model.Id">Close bidding</a>
                     }
 
                 }
