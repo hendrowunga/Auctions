@@ -11,7 +11,7 @@ namespace Auctions.Models
         public string Description { get; set; }
         public double price { get; set; }
         public IFormFile Image{ get; set; }
-        public bool IsSold { get; set; }
+        public bool IsSold { get; set; }=false;
 
         [Required]
         public string? IdentityUserId { get; set; }
